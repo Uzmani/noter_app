@@ -1,4 +1,29 @@
 <div class="container">
   <h1>Welcome to Noter</h1>
+  <h3>Create a new Note below!</h3>
+  <form action="/create" method="post">
+    <p>Title:<br> <input type="text" cols="25" name="title_input"></p>
+    <p>Content: <br><textarea cols="25" rows="5" name="content_input"></textarea><br></p>
+
+    <input type="submit" value="Add Note" >
+
+  </form>
+    
+</div>
+
+<div class="container">
+  <h1>Notes:</h1>
   
+
+<%@notes.each do |note|  %>
+    
+    <form action="/<%= note.id %>" method="get">
+    <h4>NOTE # <%= note.id %> </h4>
+    <input type="submit" value="Edit" name=<%= note.id %>>
+    </form>
+    <h4><strong>TITLE:</strong> <%= note.title %> </h4> 
+    <h4>CONTENT: <%= note.content %></h4>
+    <br>
+<%end%>
+
 </div>
