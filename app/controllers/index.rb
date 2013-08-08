@@ -3,7 +3,7 @@ get '/' do
   erb :index
 end
 
-post '/create' do 
+post '/notes' do 
   @nots = Note.all
   puts "[LOG] Posting /create"
   puts "[LOG] Params: #{params.inspect}"
@@ -12,13 +12,8 @@ post '/create' do
   redirect '/'
 end
 
-# get '/:id' do
-#   @note = Note.params[:id]  
-#   @title = "Edit note ##{params[:id]}"  
-#   erb :edit_note 
-# end  
 
-put '/update' do 
+put '/notes/:id' do 
   puts params
   puts "[LOG] Posting /update"
   puts "[LOG] Params: #{params.inspect}"
@@ -29,14 +24,23 @@ put '/update' do
   redirect '/'
 end
 
-
-
-get '/:id' do
+get '/notes/:id/edit' do
   puts params
   puts "[LOG] Posting /update"
   puts "[LOG] Params: #{params.inspect}"
 
-  @note = params[:id]
-  # @edit_title = "Update Note ##{params[:id]}"
+  @note = Note.find(params[:id])
   erb :edit_note
+end
+
+get '/notes/:id/delete' do  
+  @note = Note.find(params[:id])   
+  erb :delete  
+end 
+
+delete '/:id' do 
+  note = Note.find(params[:id])
+  note.destroy
+
+  redirect '/'
 end

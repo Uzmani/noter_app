@@ -1,10 +1,10 @@
 <div class="container">
-<h2>Update Note <%=  @note %> </h2>
+<h2>Update Note <%=  @note.id %> </h2>
 <% if @note %>  
-  <form action="/update" method="post" >
+  <form action="/notes/<%= @note.id %>" method="post" >
     <input type="hidden" name="_method" value="put">  
-    <p>Title: <input type="text" cols="25" name="title_input"></p>
-    <p>Content: <br><textarea cols="25" rows="5" name="content_input"></textarea><br></p>
+    <p>Title: <input type="text" cols="25" name="title_input" value="<%=@note.title%>"></p>
+    <p>Content: <br><textarea cols="25" rows="5" name="content_input"><%=@note.content%></textarea><br></p>
     <input type="submit" value="Update" >
   </form>
 <% end %>  
